@@ -6,16 +6,20 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args){
 
-        if (args.length<2){
-            System.out.println("Please specify addresss and port as arguments!");
-            System.exit(-1);
+        String address = "localhost";
+        int port = 8888;
+        if (args.length == 2){
+            try{
+                address = args[0];
+                port = Integer.parseInt(args[1]);
+            }
+            catch(Exception e){
+                System.out.println("Please specify addresss and port as arguments!");
+                System.exit(-1);
+            }
         }
 
-        String address = args[0];
-        int port = Integer.parseInt(args[1]);
         Socket socket = null;
-
-
         try {
             socket = new Socket(address,port);
         } catch (IOException e) {
