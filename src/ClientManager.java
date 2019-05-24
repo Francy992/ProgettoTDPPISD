@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,7 +31,8 @@ public class ClientManager implements Runnable {
             while (cont){
                 String message = br.readLine();
                 System.out.println("Received message: " + message);
-                if (message.equalsIgnoreCase("quit")){
+                CommandModel messageReceived = parseMessageToModel(message);
+                if (messageReceived.choose == 4){
                     System.out.println("Terminating ClientManager");
                     cont = false;
                     assigned_client.close();
@@ -38,7 +41,7 @@ public class ClientManager implements Runnable {
                 HttpClient getCall = new HttpClient();
                 try{
                     ResponseModel model;
-                    CityList.City city = cityList.getCityHashMap(message);
+                    CityList.City city = cityList.getCityHashMap(messageReceived.city);
                     if (city == null){
                         pw.println("Errore nell'estrazione dell'id, città non presente");
                     }
@@ -46,14 +49,15 @@ public class ClientManager implements Runnable {
                         //Before call i check that weather do not already in the object, in this case if it is in the object from of less ten minute i return this and do not call api
                         Calendar calendar = new GregorianCalendar();
                         if(city.timeStampeResponseModel != null && Duration.between(calendar.toInstant(), city.timeStampeResponseModel.toInstant()).getSeconds() < (600)){
-                            pw.println("Qui devo ritornare quello che ho già dentro");
+                            model =  city.responseModel;
                         }
                         else{
                             model =  getCall.sendGet(city.id);
                             //update responseModel in hashmap
                             cityList.setResponseModeHashMap(model);
-                            pw.println("Model vale: "+ model.list[0].weather[0].description + ", la temperatura è: " + model.list[0].main.temp);
                         }
+                        String response = prepareResponse(messageReceived, model);
+                        pw.println(response);
                     }
                     pw.flush();
                 }catch(Exception e){
@@ -65,4 +69,45 @@ public class ClientManager implements Runnable {
             e.printStackTrace();
         }
     }
+
+    private CommandModel parseMessageToModel(String message){
+        Gson gson = new Gson();
+        return gson.fromJson(String.valueOf(message), CommandModel.class);
+    }
+
+    private String prepareResponse(CommandModel model, ResponseModel responseModel){
+        String response = "";
+        switch(model.choose){
+            case 1:
+                response = getOneHourFromList(responseModel.list[0], true);
+                break;
+            case 2:
+                response += "Tomorrow's wheather:\n";
+                for(int i = 0; i<7;i++){
+                    response += getOneHourFromList(responseModel.list[i], false);
+                }
+                break;
+            case 3:
+                for(int i = 0; i<responseModel.list.length;i++){
+                    response += getOneHourFromList(responseModel.list[i], false);
+                }
+                response += "Finish\n";
+                break;
+            default:
+                break;
+        }
+        return response;
+    }
+
+    private String getOneHourFromList(ResponseModel.List list, boolean now){
+        String response = "";
+        response += now ? "" : "Prevision for: " + list.dt_txt + "\n";
+        response += "Current weather is:" + list.weather[0].description + "\n";
+        response += "Current temp about: " + list.main.temp + "°C\n";
+        response += "Max temp expected: " + list.main.temp_max + " °C\n";
+        response += "Min temp expected: " + list.main.temp_min + "°C\n";
+        response += "Humidity : " + list.main.humidity + "\n\n";
+        return response;
+    }
+
 }
