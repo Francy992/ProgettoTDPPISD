@@ -96,7 +96,12 @@ while 1:
     else:
         client_socket.send((getJson(choose, city) + "\n").encode())
         recv = client_socket.recv(1024*20).decode()
-        print("Ho ricevuto: ", recv)
+        y = json.loads(recv)
+        print("Ho ricevuto: ", y)
+        for i in y['details']:
+            print(i)
 print("Sono uscito")
+
+
 
 

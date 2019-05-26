@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class ResponseModel {
     public String code;
     public double message;
     public int cnt;
-    public List[] list;
+    public ArrayList<List> list;
     public City city;
     //public String country;
 
@@ -24,7 +26,7 @@ public class ResponseModel {
     public class List{
         public long dt; //Datetima
         public MainModel main;
-        public Weather[] weather;
+        public ArrayList<Weather> weather;
         public Clouds clouds;
         public Wind wind;
         public Sys sys;

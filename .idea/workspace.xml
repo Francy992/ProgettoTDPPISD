@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d44b1fb4-d6db-4728-8d22-82a81c3ed74c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/clientPython/mysite/Templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/clientPython/mysite/Templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ResponseToClientModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clientPython/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/clientPython/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multiclient_server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/multiclient_server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ResponseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ResponseModel.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,12 +22,15 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="ProgettoTDPPISD" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
+            <state>
               <caret line="8" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
@@ -42,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ClientManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="58" selection-start-line="58" selection-end-line="58" />
+            <state relative-caret-position="320">
+              <caret line="121" column="65" selection-start-line="121" selection-start-column="65" selection-end-line="121" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -54,11 +62,18 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CommandModel.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ResponseToClientModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="442">
+              <caret line="26" column="32" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#192#193#0" expanded="true" />
+                <element signature="e#242#243#0" expanded="true" />
+                <element signature="e#513#514#0" expanded="true" />
+                <element signature="e#587#588#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -66,10 +81,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CityList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="24" column="43" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
+            <state>
+              <caret line="12" column="41" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#CityList#0;class#CityList#0" />
+                <element signature="e#589#1067#0" />
+                <element signature="e#867#964#1" />
+                <element signature="e#1100#1200#0" />
+                <element signature="method#getCityHashMap#0;class#CityList#0" />
+                <element signature="method#setResponseModeHashMap#0;class#CityList#0" />
+                <element signature="class#City#0;class#CityList#0" />
+                <element signature="method#toString#0;class#City#0;class#CityList#0" />
+                <element signature="class#coordinate#0;class#CityList#0" />
               </folding>
             </state>
           </provider>
@@ -90,8 +113,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ResponseModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="31" column="5" selection-start-line="23" selection-start-column="4" selection-end-line="31" selection-end-column="5" />
+            <state relative-caret-position="216">
+              <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -130,21 +153,24 @@
       <list>
         <option value="$PROJECT_DIR$/src/Client.java" />
         <option value="$PROJECT_DIR$/src/HttpClient.java" />
-        <option value="$PROJECT_DIR$/src/ResponseModel.java" />
         <option value="$PROJECT_DIR$/src/Server.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/CityList.java" />
         <option value="$PROJECT_DIR$/src/CommandModel.java" />
+        <option value="$PROJECT_DIR$/src/library/ResponseToClientModel.java" />
+        <option value="$PROJECT_DIR$/src/library/WeatherObject.java" />
+        <option value="$PROJECT_DIR$/src/WeatherObject.java" />
+        <option value="$PROJECT_DIR$/src/ResponseModel.java" />
         <option value="$PROJECT_DIR$/src/ClientManager.java" />
+        <option value="$PROJECT_DIR$/src/ResponseToClientModel.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="y" value="-10" />
-    <option name="width" value="1939" />
-    <option name="height" value="1049" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -154,8 +180,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -181,18 +205,23 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558797972637" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lib/gson-2.8.2.jar!/" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558904778439" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/library/gson-2.8.5.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.scopes" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="library" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Git\ProgettoTDPPISD\src" />
     </key>
@@ -247,28 +276,38 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2557047" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.26066098" />
+      <window_info id="Structure" order="1" sideWeight="0.50165564" side_tool="true" weight="0.26066098" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="UI Designer" order="5" />
       <window_info id="Learn" order="6" />
-      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info id="Favorites" order="7" sideWeight="0.5005417" side_tool="true" visible="true" weight="0.26066098" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.25568798" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.19546743" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39943343" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.19501625" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.34561214" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32830188" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3286119" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32827735" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32827735" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -278,34 +317,6 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24934037" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Learn" order="6" />
-      <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-    </layout-to-restore>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added innerclient and periodic save" />
@@ -316,9 +327,9 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ClientManager.java</url>
-          <line>58</line>
+          <line>67</line>
           <properties />
-          <option name="timeStamp" value="7" />
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -332,9 +343,10 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/CommandModel.java" />
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
+        <state>
           <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
@@ -351,20 +363,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CommandModel.java">
+    <entry file="file://$PROJECT_DIR$/src/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="374">
+          <caret line="25" column="52" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CityList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="24" column="43" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
+        <state>
+          <caret line="12" column="41" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#CityList#0;class#CityList#0" />
+            <element signature="e#589#1067#0" />
+            <element signature="e#867#964#1" />
+            <element signature="e#1100#1200#0" />
+            <element signature="method#getCityHashMap#0;class#CityList#0" />
+            <element signature="method#setResponseModeHashMap#0;class#CityList#0" />
+            <element signature="class#City#0;class#CityList#0" />
+            <element signature="method#toString#0;class#City#0;class#CityList#0" />
+            <element signature="class#coordinate#0;class#CityList#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/library/WeatherObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WeatherObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="27" lean-forward="true" selection-start-column="27" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ResponseModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -378,29 +422,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ResponseModel.java">
+    <entry file="file://$PROJECT_DIR$/src/ClientManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="31" column="5" selection-start-line="23" selection-start-column="4" selection-end-line="31" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="25" column="52" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
+        <state relative-caret-position="320">
+          <caret line="121" column="65" selection-start-line="121" selection-start-column="65" selection-end-line="121" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClientManager.java">
+    <entry file="file://$PROJECT_DIR$/src/ResponseToClientModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        <state relative-caret-position="442">
+          <caret line="26" column="32" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#192#193#0" expanded="true" />
+            <element signature="e#242#243#0" expanded="true" />
+            <element signature="e#513#514#0" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
           </folding>
         </state>
       </provider>
