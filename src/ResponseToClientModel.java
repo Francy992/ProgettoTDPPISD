@@ -4,7 +4,7 @@ import java.util.List;
 public class ResponseToClientModel {
     public boolean error;
     public String city;
-    public ArrayList<Details> details; // Five day
+    public ArrayList<Details> details; // one for one different day
 
     public ResponseToClientModel(){
         this.details = new ArrayList<Details>();
@@ -24,6 +24,9 @@ public class ResponseToClientModel {
         public String maxTemp;
         public String temp;
         public String wind;
+        public String degree;
+        public String humidity;
         public String imageName;
+        public String date;
     }
 }
