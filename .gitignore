@@ -31,3 +31,8 @@ hs_err_pid*
 out/
 *.properties
 *.MF
+*.pyc
+*.pyc
+clientPython/mysite/mysite/__pycache__/settings.cpython-37.pyc
+*.pyc
+.idea/workspace.xml
