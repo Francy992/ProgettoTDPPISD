@@ -32,9 +32,8 @@ public class ClientManager implements Runnable {
             boolean cont = true;
             while (cont){
                 String message = br.readLine();
-                System.out.println("Received message: " + message);
                 CommandModel messageReceived = parseMessageToModel(message);
-                if (messageReceived.choose == 4){
+                if (messageReceived != null && messageReceived.choose == 4){
                     System.out.println("Terminating ClientManager");
                     cont = false;
                     assigned_client.close();

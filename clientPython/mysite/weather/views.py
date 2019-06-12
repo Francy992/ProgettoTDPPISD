@@ -7,6 +7,7 @@ def index(request):
     city = ""
     city = request.POST.get("city", "")
     #city = "Floridia"
+    print("Sono dentro index")
     if (city != ""): 
         '''In questo caso è stata cercata una città dal modulo find.'''
         try:
@@ -37,6 +38,7 @@ def contactServer(city):
         client_socket.connect(("localhost", 8888))
         client_socket.send((getJson(1, city) + "\n").encode())
         recv = client_socket.recv(1024*20).decode()
+        print("Ho ricevuto, non entro + qui.")
         return json.loads(recv)
     except Exception as msg:
         return json.loads('{"error":"True", "messageError":"Server contact error."}')

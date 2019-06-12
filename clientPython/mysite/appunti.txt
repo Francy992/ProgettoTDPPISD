@@ -1,0 +1,9 @@
+Comandi django:
+Per avviare l'applicazione:
+    python manage.py runserver.
+Per aggiungere un'app:
+    python startapp nomeApp.
+Per aggiungere un model al database: 
+    python manage.py makemigrations
+    e dopo:
+    python manage.py migration

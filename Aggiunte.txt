@@ -1,0 +1,2 @@
+Utenti nel server java che si ricordi lo stato delle richieste dell'utente.
+Slide visive del progetto
