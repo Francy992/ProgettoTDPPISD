@@ -48,6 +48,12 @@
 
 				</div>
 			</div> <!-- .site-header -->
+			{% if userDate.user == "True" %}
+				<div>Utente già loggato, username: {{userDate.username}}, password: {{userDate.password}}</div>
+			{% else %}
+				<div>Utente non loggato.</div>
+			{% endif %}
+			
 			<div class="container">
 				<h1 style="text-align: center">Login</h1>
 				<div class="row">

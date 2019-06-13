@@ -38,6 +38,11 @@ public class ClientManager implements Runnable {
                     cont = false;
                     assigned_client.close();
                 }
+                if(messageReceived != null && messageReceived.choose == 1){
+                    Gson gson = new Gson();
+                    pw.println(gson.toJson(getStringForJson(false, "Utente registrato correttamente.")));
+                    pw.flush();
+                }
                 //Check that message is a good city.
                 HttpClient getCall = new HttpClient();
                 try{
@@ -73,6 +78,13 @@ public class ClientManager implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String register(String message){
+        //Controllare che tutte e 3 le città esistino
+        //Se esistono registrare in un file?
+        //Ritornare registrato correttamente.
+        return "";
     }
 
     private ErrorModel getStringForJson(boolean errorBool, String message){

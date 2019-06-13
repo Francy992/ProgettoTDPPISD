@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 #from . models import Weather
 import socket
 import json
@@ -24,6 +24,23 @@ def index(request):
     response =  ""
     if(username != "" and password != ""):
         response = contactServer(username, password)
+        #response dovrà essere un messaggio del tipo: 
+            #error true or false
+            #messageError
+            #preferCity:{
+            # citta1, citta2...
+            # tempCitta1, tempCitta2...
+            # }
+                
+        if response.error == "False":
+            request.session['cityPrefer'] =  json.loads(response.preferCity)
+            return redirect('/weather')
+
+    userDate = json.loads('{"user": "False"}')
+    '''if(request.session['username'] != "" and request.session['password'] != ""):
+        data = json.dumps({"user": "True", "username": request.session['username'], "password": request.session['password']})
+        userDate = json.loads(data)
+        print(userDate)'''
 
     STATIC_URL = '/static/'
     return render(

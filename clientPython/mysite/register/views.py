@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 #from . models import Weather
 import socket
 import json
@@ -21,9 +21,16 @@ def index(request):
     '''
     username = request.POST.get("username", "")
     password = request.POST.get("password", "")
+    city1 = request.POST.get("city1", "")
+    city2 = request.POST.get("city2", "")
+    city3 = request.POST.get("city3", "")
+
     response = ""
     if(username != "" and password != ""):
-        response = contactServer(username, password)
+        response = contactServer(username, password, city1, city2, city3)
+        #request.session['username'] = username
+        #request.session['password'] = password
+        #return redirect('/login')  # 4
 
     STATIC_URL = '/static/'
     return render(
@@ -34,16 +41,16 @@ def index(request):
     )
 
 
-def getJson(choose, username, password):
-    data = {"choose": choose, "username": username, "password": password}
+def getJson(choose, username, password, city1, city2, city3):
+    data = {"choose": choose, "username": username, "password": password, "city1": city1, "city2": city2, "city3": city3}
     print(data)
     return json.dumps(data)
 
-def contactServer(username, password):
+def contactServer(username, password, city1, city2, city3):
     try:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect(("localhost", 8888))
-        client_socket.send((getJson(1, username, password) + "\n").encode())
+        client_socket.send((getJson(1, username, password, city1, city2, city3) + "\n").encode())
         recv = client_socket.recv(1024*20).decode()
         print("Ho ricevuto, non entro + qui.")
         return json.loads(recv)
