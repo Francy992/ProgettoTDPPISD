@@ -28,6 +28,7 @@ def index(request):
     response = ""
     if(username != "" and password != ""):
         response = contactServer(username, password, city1, city2, city3)
+        print(response)
         #request.session['username'] = username
         #request.session['password'] = password
         #return redirect('/login')  # 4

@@ -50,6 +50,22 @@
 
 			<div class="hero" data-bg-image="{{ STATIC_URL }}images/banner.png">
 				<div class="container">
+						{% if response.error == "false" %}
+						<div class="row">
+							<div class="col-md-12">
+								<h1>Città preferite:</h1>
+							</div>
+							<div class="col-md-4">
+								aaaa
+							</div>
+							<div class="col-md-4">
+								bbbb
+							</div>
+							<div class="col-md-4">
+								cccc
+							</div>
+						</div>
+					{% endif %}
                     <form action="/weather" class="find-location" method="POST">
                         <input style="background-color: rgb(232, 240, 254)"type="text" name="city" placeholder="Find your location...">
                         <input type="submit" value="Find">

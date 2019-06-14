@@ -38,7 +38,14 @@ public class ClientManager implements Runnable {
                     cont = false;
                     assigned_client.close();
                 }
-                if(messageReceived != null && messageReceived.choose == 1){
+                else{
+                    HandleClientRequest hcr = new HandleClientRequest(cityList);
+                    String messageForClient = hcr.HandleRequest(messageReceived.choose, message);//choose is 1/2/3
+                    Gson gson = new Gson();
+                    pw.println(messageForClient);
+                    pw.flush();
+                }
+                /*if(messageReceived != null && messageReceived.choose == 1){
                     Gson gson = new Gson();
                     pw.println(gson.toJson(getStringForJson(false, "Utente registrato correttamente.")));
                     pw.flush();
@@ -73,7 +80,7 @@ public class ClientManager implements Runnable {
                     Gson gson = new Gson();
                     pw.println(gson.toJson(getStringForJson(true, "Eccezione nel server.")));
                     pw.flush();
-                }
+                }*/
             }
         } catch (IOException e) {
             e.printStackTrace();

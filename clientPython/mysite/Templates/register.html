@@ -77,10 +77,10 @@
 								<button type="submit" class="btn btn-primary" id="submit">Register</button>
 							</div>		
 							<div id="errorMessage" style="color:red;text-align: center; font-size: 20px">
-								{% if response.error == "True" %}
-									The message error is: {{response.messageError}}
-								{% else %}
-									aaa --> {{response.messageError}}
+								{% if response.error == True %}
+									{{response.messageError}}
+								{%elif response.error == False%}
+									{{response.messageError}}
 								{% endif %}
 							</div>		
 							{% csrf_token %}			
