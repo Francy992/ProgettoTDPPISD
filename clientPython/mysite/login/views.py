@@ -9,23 +9,26 @@ def index(request):
     response = None
     if(username != "" and password != ""):
         response = contactServer(username, password)
-        print(response)
-        if response['error'] == "False":
+        print("Response --> ", response)
+        if response['error'] == False:
             request.session['cityPrefer'] = response
+            request.session['loggato'] = True
+            request.session['username'] = username
+            request.session['password'] = password
             return redirect('/weather')
-        
+    
     userDate = json.loads('{"user": "False"}')
-    '''if(request.session['username'] != "" and request.session['password'] != ""):
+    if('username' in request.session and 'password' in request.session):
         data = json.dumps({"user": "True", "username": request.session['username'], "password": request.session['password']})
         userDate = json.loads(data)
-        print(userDate)'''   
+        print(userDate)  
 
     STATIC_URL = '/static/'
     return render(
         request,
         'login.html',
         locals(),
-        {"response": response},
+        {"response": response, 'userDate': userDate},
     )
 
 
@@ -40,6 +43,7 @@ def contactServer(username, password):
         client_socket.connect(("localhost", 8888))
         client_socket.send((getJson(2, username, password) + "\n").encode())
         recv = client_socket.recv(1024*20).decode()
+        print("Recv-->",recv)
         return json.loads(recv)
     except Exception as msg:
         return json.loads('{"error":"True", "messageError":"Server contact error."}')

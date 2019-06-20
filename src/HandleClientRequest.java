@@ -1,12 +1,11 @@
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.time.Duration;
+import java.util.*;
 
 public class HandleClientRequest {
     public CityList cityList;
@@ -23,6 +22,7 @@ public class HandleClientRequest {
                 messRet = Login(message);
                 break;
             case 3://Request city's weather case.
+                messRet = WeatherRequest(message);
                 break;
             default://Return error json
                 break;
@@ -36,15 +36,15 @@ public class HandleClientRequest {
         //Controllare che tutte e 3 le città esistino
         CityList.City city = cityList.getCityHashMap(register.city1);
         if (city == null) {
-            return gson.toJson(new FinalResponse(1, true, "La città numero 1 non è presente nella lista.<br/> Registrazione non consentita."));
+            return gson.toJson(new FinalResponse(1, true, "La città numero 1 non è presente nella lista. Registrazione non consentita."));
         }
         city = cityList.getCityHashMap(register.city2);
         if (city == null) {
-            return gson.toJson(new FinalResponse(1,true, "La città numero 2 non è presente nella lista.<br/> Registrazione non consentita."));
+            return gson.toJson(new FinalResponse(1,true, "La città numero 2 non è presente nella lista. Registrazione non consentita."));
         }
         city = cityList.getCityHashMap(register.city3);
         if (city == null) {
-            return gson.toJson(new FinalResponse(1, true,"La città numero 3 non è presente nella lista.<br/> Registrazione non consentita."));
+            return gson.toJson(new FinalResponse(1, true,"La città numero 3 non è presente nella lista. Registrazione non consentita."));
         }
         //TODO: Se esistono registrare in un file?
         if(UserState.insertNewUser(register.username, register.password, register.city1, register.city2, register.city3))
@@ -60,6 +60,8 @@ public class HandleClientRequest {
         //Controllo che username e password esistono. Se esistono recupero le 3 città della persona
         LoginModelRequest login =  gson.fromJson(String.valueOf(message), LoginModelRequest.class);
         String [] userDate = UserState.getUser(login.username);
+        if(userDate == null)
+            return gson.toJson(new FinalResponse(2, true, "Utente non presente o password non corretta. Riprova."));
         String x = userDate[0];
         if(userDate == null || (!x.equals(login.password)))
             return gson.toJson(new FinalResponse(2, true, "Utente non presente o password non corretta. Riprova."));
@@ -71,27 +73,63 @@ public class HandleClientRequest {
         return gson.toJson(new FinalResponse(2, false, "Login effettuato con successo", weatherCity1, weatherCity2, weatherCity3));
     }
 
-    private ErrorModel getStringForJson(boolean errorBool, String message){
-        ErrorModel error = new ErrorModel();
-        error.error = errorBool;
-        error.messageError = message;
-        return error;
+    private String WeatherRequest(String message){
+        HttpClient getCall = new HttpClient();
+        try{
+            Gson gson = new Gson();
+            WeatherModelRequest weather =  gson.fromJson(String.valueOf(message), WeatherModelRequest.class);
+            ResponseModel model;
+            CityList.City city = cityList.getCityHashMap(weather.city);
+            if (city == null){
+                return gson.toJson(new FinalResponse(3, true, "Requested city not present in db."));
+            }
+            else{
+                //Before call i check that weather do not already in the object, in this case if it is in the object from of less ten minute i return this and do not call api
+                Calendar calendar = new GregorianCalendar();
+                if(city.timeStampeResponseModel != null && Duration.between(calendar.toInstant(), city.timeStampeResponseModel.toInstant()).getSeconds() < (600)){
+                    model =  city.responseModel;
+                }
+                else{
+                    //get city weather and store in hashmap.
+                    model =  getCall.sendGet(city.id);
+                    //update responseModel in hashmap
+                    cityList.setResponseModeHashMap(model);
+                }
+                ResponseToClientModel responseToClientModel = prepareResponseToClient(model, 3);
+                return gson.toJson(new FinalResponse(3, false, "City found.", responseToClientModel));
+            }
+        }catch(Exception e){
+            Gson gson = new Gson();
+            return gson.toJson(new FinalResponse(3, true, "Exception on server."));
+        }
     }
 
-    private ResponseToClientModel prepareResponseToClient(ResponseModel responseModel, int typeOfRequest) throws Exception {
-        ResponseToClientModel response = new ResponseToClientModel();
-        response.city = responseModel.city.name;
-        response.error = false;
-        switch (typeOfRequest){
-            case 1:
-                //for(int i = 0; i < responseModel.list.size(); i++){
-                response.details = getDetails(responseModel.list);
-                break;
-            default:
-                response.details = null;
-                break;
+    private String getWeatherOneShot(String city){
+        CityList.City citta = cityList.getCityHashMap(city);
+        if (citta == null){
+            return null;
         }
-        return response;
+        Calendar calendar = new GregorianCalendar();
+        try{
+            if(!(citta.timeStampeResponseModel != null && Duration.between(calendar.toInstant(), citta.timeStampeResponseModel.toInstant()).getSeconds() < (600))){
+                //get city weather and store in hashmap.
+                HttpClient getCall = new HttpClient();
+                citta.responseModel =  getCall.sendGet(citta.id);
+                //update responseModel in hashmap
+                cityList.setResponseModeHashMap(citta.responseModel);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        String ret = "";
+        ret += "City: " + city + "<br/>";
+        ret += "Temp: " + citta.responseModel.list.get(0).main.temp + "°C<br/>";
+        ret += "humidity: " + citta.responseModel.list.get(0).main.humidity + "%<br/>";
+        ret += "Wind: " + citta.responseModel.list.get(0).wind.speed + " km/h - Direction: "  + degToCompass(citta.responseModel.list.get(0).wind.deg) + "<br/>";
+        return ret;
     }
 
     private ArrayList<ResponseToClientModel.Details> getDetails(ArrayList<ResponseModel.List> responseModelList)throws Exception{
@@ -113,8 +151,6 @@ public class HandleClientRequest {
         details.add(detail);
         return details;
     }
-
-
     private ResponseToClientModel.WeatherObject getWeatherObject(ResponseModel.List responseModelList){
         //build Weatherobject for response.
         ResponseToClientModel.WeatherObject weatherObject = new ResponseToClientModel.WeatherObject();
@@ -134,6 +170,22 @@ public class HandleClientRequest {
         int valInt = (int)Math.round(val);
         return arr[(valInt % 16)];
     }
+    private ResponseToClientModel prepareResponseToClient(ResponseModel responseModel, int typeOfRequest) throws Exception {
+        ResponseToClientModel response = new ResponseToClientModel();
+        response.city = responseModel.city.name;
+        response.error = false;
+        switch (typeOfRequest){
+            case 3:
+                //for(int i = 0; i < responseModel.list.size(); i++){
+                response.details = getDetails(responseModel.list);
+                break;
+            default:
+                response.details = null;
+                break;
+        }
+        return response;
+    }
+
     private String getDayForDetails(String data_txt, long timestamp) throws Exception{ // compare timestamp with day date, today, tomorrow or day of week
         //get day from data_txt, get day from timestamp and compare it.
         Timestamp ts = new Timestamp(System.currentTimeMillis());
@@ -158,24 +210,6 @@ public class HandleClientRequest {
         }
     }
 
-    private CommandModel parseMessageToModel(String message){
-        Gson gson = new Gson();
-        return gson.fromJson(String.valueOf(message), CommandModel.class);
-    }
-
-    private String getWeatherOneShot(String city){
-        CityList.City citta = cityList.getCityHashMap(city);
-        if (city == null){
-            return null;
-        }
-        String ret = "";
-        ret += "City: " + city + "<br/>";
-        ret += "Temp: " + citta.responseModel.list.get(0).main.temp_kf + "<br/>";
-        ret += "Clouds: " + citta.responseModel.list.get(0).clouds.all + "<br/>";
-        ret += "Wind: " + citta.responseModel.list.get(0).wind.speed + " - "  + citta.responseModel.list.get(0).wind.deg + "<br/>";
-        return ret;
-    }
-
     public class RegisterModelRequest {
         public int choose;
         public String username;
@@ -191,6 +225,10 @@ public class HandleClientRequest {
         public String password;
     }
 
+    public class WeatherModelRequest {
+        public int choose;
+        public String city;
+    }
 
     public class FinalResponse {
         public int choose;
@@ -215,6 +253,15 @@ public class HandleClientRequest {
             error = err;
             messageError = message;
             responseAllWeather = null;
+            city1 = "";
+            city2 = "";
+            city3 = "";
+        }
+        public FinalResponse(int choose, boolean err, String message, ResponseToClientModel responseAllWeather){
+            this.choose = choose;
+            error = err;
+            messageError = message;
+            this.responseAllWeather = responseAllWeather;
             city1 = "";
             city2 = "";
             city3 = "";

@@ -50,19 +50,19 @@
 
 			<div class="hero" data-bg-image="{{ STATIC_URL }}images/banner.png">
 				<div class="container">
-						{% if response.error == "false" %}
+					{% if userSession.error == False %}
 						<div class="row">
 							<div class="col-md-12">
 								<h1>Città preferite:</h1>
 							</div>
 							<div class="col-md-4">
-								aaaa
+								{{userSession.city1 | safe }}
 							</div>
 							<div class="col-md-4">
-								bbbb
+								{{userSession.city2 | safe }}
 							</div>
 							<div class="col-md-4">
-								cccc
+								{{userSession.city3 | safe }}
 							</div>
 						</div>
 					{% endif %}
@@ -85,7 +85,7 @@
             
 
 
-            {% for detail in y.details %}
+            {% for detail in y.responseAllWeather.details %}
             <div class="forecast-table" >
 				<div class="container">
 					<div class="forecast-container">

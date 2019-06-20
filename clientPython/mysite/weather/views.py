@@ -11,8 +11,10 @@ def index(request):
     if (city != ""): 
         '''In questo caso è stata cercata una città dal modulo find.'''
         try:
-            y = contactServer(1, city)
+            y = contactServer(3, city)
             cityRequired = city
+            print('Y-->', y)
+            print("city-->", city)
         except Exception as msg:
              y = json.loads('{"error":"True", "messageError":"Server contact error."}')
     else:
@@ -22,7 +24,8 @@ def index(request):
     userSession = inizializeJson("Nessuna città preferita salvata.")
     if(request.session.get('cityPrefer') != None):
         userSession = getPreferCity(request.session.get('cityPrefer'))
-
+        print(userSession)
+        
     STATIC_URL = '/static/'
     return render(
         request,
@@ -43,7 +46,6 @@ def contactServer(choose, city):
         client_socket.connect(("localhost", 8888))
         client_socket.send((getJson(choose, city) + "\n").encode())
         recv = client_socket.recv(1024*20).decode()
-        print("Ho ricevuto, non entro + qui.")
         return json.loads(recv)
     except Exception as msg:
         return json.loads('{"error":"True", "messageError":"Server contact error."}')
@@ -55,4 +57,4 @@ def getPreferCity(request):
 
 def inizializeJson(message):
     data = {"error":"True", "messageError":message}
-    return json.loads(data)
+    return json.dumps(data)
