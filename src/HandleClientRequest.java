@@ -14,6 +14,7 @@ public class HandleClientRequest {
     }
     public String HandleRequest(int request, String message){
         String messRet = "";
+        Gson gson = new Gson();
         switch(request){
             case 1: //register case
                 messRet = Register(message);
@@ -25,7 +26,7 @@ public class HandleClientRequest {
                 messRet = WeatherRequest(message);
                 break;
             default://Return error json
-                break;
+                return gson.toJson(new FinalResponse(1, true,"Richiesta non gestita."));
         }
         return messRet;
     }
@@ -46,7 +47,7 @@ public class HandleClientRequest {
         if (city == null) {
             return gson.toJson(new FinalResponse(1, true,"La città numero 3 non è presente nella lista. Registrazione non consentita."));
         }
-        //TODO: Se esistono registrare in un file?
+
         if(UserState.insertNewUser(register.username, register.password, register.city1, register.city2, register.city3))
             //Ritornare registrato correttamente.
             return gson.toJson(new FinalResponse(1, false, "Utente registraro correttamente."));
