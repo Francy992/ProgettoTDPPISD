@@ -51,7 +51,6 @@ def contactServer(choose, city):
         return json.loads('{"error":"True", "messageError":"Server contact error."}')
 
 def getPreferCity(request):
-    print("aaaaaaaaaaaaaaaaa", request)
     if request != None:
         return request
 

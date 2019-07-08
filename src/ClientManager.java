@@ -1,8 +1,6 @@
 import com.google.gson.Gson;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+
+import java.io.*;
 import java.net.Socket;
 
 
@@ -10,9 +8,11 @@ import java.net.Socket;
 public class ClientManager implements Runnable {
     Socket assigned_client;
     CityList cityList;
-    public ClientManager(Socket client, CityList cityList){
+    int number;
+    public ClientManager(Socket client, CityList cityList, int number){
         assigned_client = client;
         this.cityList = cityList;
+        this.number = number;
     }
     @Override
     public void run() {
@@ -20,7 +20,7 @@ public class ClientManager implements Runnable {
 
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(assigned_client.getInputStream()));
-            PrintWriter pw = new PrintWriter(assigned_client.getOutputStream());
+            PrintWriter pw = new PrintWriter(new OutputStreamWriter(assigned_client.getOutputStream()));
             boolean cont = true;
             while (cont){
                 String message = br.readLine();
@@ -37,9 +37,10 @@ public class ClientManager implements Runnable {
                     pw.flush();
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            //e.printStackTrace();
         }
+        System.out.println("Close ClientManager for Client number: " + this.number);
     }
 
     private CommandModel parseMessageToModel(String message){

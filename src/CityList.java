@@ -28,7 +28,7 @@ public class CityList {
             for(City city : cities){
                 this.cityList.put(city.name.toLowerCase().replace(" ",""), city);
             }
-            System.out.println(cityList.get("San francisco".toLowerCase().replace(" ","")));
+            //System.out.println(cityList.get("San francisco".toLowerCase().replace(" ","")));
         } catch (FileNotFoundException e) {
             System.out.println("Error read city list");
             e.printStackTrace();

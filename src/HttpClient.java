@@ -15,7 +15,7 @@ public class HttpClient {
     // HTTP GET request
     public ResponseModel sendGet(int cityId) throws Exception {
         String keyApi = "d7e9e670c8248069375e01fe693a0268";
-        System.out.println("Prima di chiamare, city id vale: " + cityId);
+        //System.out.println("Prima di chiamare, city id vale: " + cityId);
         String url = "http://api.openweathermap.org/data/2.5/forecast?id="+ cityId + "&APPID="+keyApi+"&units=Metric";
 
         URL obj = new URL(url);
@@ -31,7 +31,7 @@ public class HttpClient {
         if(responseCode != 200) //an error occured
             return null;
 
-        System.out.println("Response Code : " + responseCode);
+        //System.out.println("Response Code : " + responseCode);
 
         BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));

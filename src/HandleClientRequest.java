@@ -15,18 +15,26 @@ public class HandleClientRequest {
     public String HandleRequest(int request, String message){
         String messRet = "";
         Gson gson = new Gson();
-        switch(request){
-            case 1: //register case
-                messRet = Register(message);
-                break;
-            case 2: //Login case
-                messRet = Login(message);
-                break;
-            case 3://Request city's weather case.
-                messRet = WeatherRequest(message);
-                break;
-            default://Return error json
-                return gson.toJson(new FinalResponse(1, true,"Richiesta non gestita."));
+        try {
+            switch(request){
+                case 1: //register case
+                    System.out.println("Request for Register.");
+                    messRet = Register(message);
+                    break;
+                case 2: //Login case
+                    System.out.println("Request for Login.");
+                    messRet = Login(message);
+                    break;
+                case 3://Request city's weather case.
+                    System.out.println("Request for Wheather.");
+                    messRet = WeatherRequest(message);
+                    break;
+                default://Return error json
+                    return gson.toJson(new FinalResponse(1, true,"Richiesta non gestita."));
+            }
+        }
+        catch(Exception e){
+
         }
         return messRet;
     }

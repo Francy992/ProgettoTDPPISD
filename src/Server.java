@@ -43,12 +43,12 @@ public class Server {
                 nAcceptedRequest++;
                 System.out.println("Accepted connection request n." + nAcceptedRequest + " from:" + client.getRemoteSocketAddress());
 
-                ClientManager cm = new ClientManager(client, cityList);
+                ClientManager cm = new ClientManager(client, cityList, nAcceptedRequest);
 
                 Thread t = new Thread(cm, "Thread" + nAcceptedRequest + " started.");
                 t.start();
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
 
         }
